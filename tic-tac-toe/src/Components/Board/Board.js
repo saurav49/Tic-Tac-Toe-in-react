@@ -44,7 +44,6 @@ const Board = () => {
       for(let index=0; index<winningCombo.length; index++) {
           const [a, b, c] = winningCombo[index];
 
-          console.log(`a : ${board[a]}, b : ${board[b]}, c : ${board[c]}`);
           if(board[a] && board[a] === board[b] && board[a] === board[c]) {
             return board[a];
           }
@@ -53,7 +52,8 @@ const Board = () => {
   }
 
   let winner = calculateWinner(boardSquare);
-  console.log(winner);
+  
+//   console.log(winner);
   let whoseTurn = winner ? `Winner is ${winner}` : `Next Player : ${isXturn ? "X" : "O"}`;
   
   return(
