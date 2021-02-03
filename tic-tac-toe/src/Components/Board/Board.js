@@ -3,10 +3,15 @@ import Square from "../Square/Square";
 
 // Board
 const Board = () => {
+
+    let randomTurn = Math.floor(Math.random()*10);
     // BoardState
     const [boardSquare, setBoardSquare] = useState(Array(9).fill(null));
     // TurnState
-    const [isXturn, setIsXturn] = useState(true);
+    // const [isXturn, setIsXturn] = useState(true);
+    const [isXTurn, setIsXturn] = useState((randomTurn%2 === 0) ? "X" : "O");
+
+    console.log(isXTurn);
 
   // Create a handleClick Function
   const handleClick = (index) => {
@@ -16,11 +21,11 @@ const Board = () => {
       // if value is already there then return
       if(winner || newBoard[index]) return;
       // put x or o in it
-      newBoard[index] = isXturn ? "X" : "O";
+      newBoard[index] = isXTurn;
       // setstate the board state
       setBoardSquare(newBoard);
       // setstate the next turn
-      setIsXturn(!isXturn);
+      setIsXturn(newBoard[index] === "X" ? "O" : "X");
   }
 
   const renderSquare = (index) => {
@@ -37,7 +42,7 @@ const Board = () => {
           [0, 3, 6],
           [1, 4, 7],
           [2, 5, 8],
-          [0, 4, 7],
+          [0, 4, 8],
           [2, 4, 6]
       ]
 
@@ -54,7 +59,7 @@ const Board = () => {
   let winner = calculateWinner(boardSquare);
   
 //   console.log(winner);
-  let whoseTurn = winner ? `Winner is ${winner}` : `Next Player : ${isXturn ? "X" : "O"}`;
+  let whoseTurn = winner ? `Winner is ${winner}` : `Next Player : ${isXTurn ? "X" : "O"}`;
   
   return(
       <React.Fragment>
